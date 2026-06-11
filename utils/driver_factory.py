@@ -1,10 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
-from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.firefox import GeckoDriverManager
-from selenium.webdriver.chrome.service import Service as ChromeService
-from selenium.webdriver.firefox.service import Service as FirefoxService
 
 
 class DriverFactory:
@@ -26,12 +22,7 @@ class DriverFactory:
             options.add_argument("--disable-dev-shm-usage")
             options.add_argument("--no-sandbox")
 
-            driver = webdriver.Chrome(
-                service=ChromeService(
-                    ChromeDriverManager().install()
-                ),
-                options=options,
-            )
+            driver = webdriver.Chrome(options=options)
 
         elif browser == "firefox":
             options = FirefoxOptions()
@@ -39,12 +30,7 @@ class DriverFactory:
             if headless:
                 options.add_argument("--headless")
 
-            driver = webdriver.Firefox(
-                service=FirefoxService(
-                    GeckoDriverManager().install()
-                ),
-                options=options,
-            )
+            driver = webdriver.Firefox(options=options)
 
             driver.maximize_window()
 

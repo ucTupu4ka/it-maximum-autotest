@@ -1,13 +1,6 @@
-import os
-from pathlib import Path
-
 import pytest
 
 from utils.driver_factory import DriverFactory
-from pages.login_page import LoginPage
-from pages.secure_area_page import SecureAreaPage
-
-from data.users import VALID_USER
 
 
 def pytest_addoption(parser):
@@ -38,25 +31,3 @@ def driver(request):
     yield driver
 
     driver.quit()
-
-
-@pytest.fixture
-def login_page(driver):
-    page = LoginPage(driver)
-    page.open()
-    return page
-
-
-@pytest.fixture
-def authorized_user(driver):
-    login_page = LoginPage(driver)
-    login_page.open()
-
-    login_page.login(VALID_USER)
-
-    return SecureAreaPage(driver)
-
-
-@pytest.fixture(scope="session")
-def base_url():
-    return "https://the-internet.herokuapp.com"
