@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "it-maximum-autotest"
+version = "0.1.0"
+description = "UI automation tests"
+authors = ["YakovlevDmitry"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pytest = "^8.4.0"
+selenium = "^4.34.0"
+webdriver-manager = "^4.0.2"
+allure-pytest = "^2.15.0"
+python-dotenv = "^1.1.1"
