@@ -4,11 +4,14 @@ from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
 
 class DriverFactory:
+    """Driver factory."""
+
     @staticmethod
     def create_driver(
         browser: str,
         headless: bool,
     ):
+        """Create driver."""
         browser = browser.lower()
 
         if browser == "chrome":

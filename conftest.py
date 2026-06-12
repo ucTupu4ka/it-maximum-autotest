@@ -4,10 +4,12 @@ import allure
 import pytest
 
 from utils.driver_factory import DriverFactory
-from utils.logger import get_logger
+
+logger = logging.getLogger(__name__)
 
 
 def pytest_addoption(parser):
+    """Add command line options."""
     parser.addoption(
         "--browser",
         action="store",
@@ -18,29 +20,22 @@ def pytest_addoption(parser):
     parser.addoption(
         "--headless",
         action="store_true",
-        default=True,
+        default=False,
         help="Run browser in headless mode",
-    )
-
-
-def pytest_configure(config):
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s | %(levelname)-7s | %(name)s | %(message)s",
-        datefmt="%H:%M:%S",
     )
 
 
 @pytest.fixture(autouse=True)
 def log_test_boundaries(request):
-    log = get_logger("test")
-    log.info("START %s", request.node.name)
+    """Fixture for logging test boundaries."""
+    logger.info("START %s", request.node.name)
     yield
-    log.info("END %s", request.node.name)
+    logger.info("END %s", request.node.name)
 
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
+    """Hook  for make report if test failed."""
     outcome = yield
     report = outcome.get_result()
     setattr(item, f"rep_{report.when}", report)
@@ -48,11 +43,11 @@ def pytest_runtest_makereport(item, call):
 
 @pytest.fixture(scope="function")
 def driver(request):
+    """Driver fixture."""
     browser = request.config.getoption("--browser")
     headless = request.config.getoption("--headless")
 
-    log = get_logger("driver")
-    log.info("Creating driver: browser=%s, headless=%s", browser, headless)
+    logger.info("Creating driver: browser=%s, headless=%s", browser, headless)
 
     driver = DriverFactory.create_driver(
         browser=browser,

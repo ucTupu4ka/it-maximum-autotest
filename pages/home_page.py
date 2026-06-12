@@ -5,6 +5,8 @@ from data.constants import BASE_URL
 
 
 class HomePage(BasePage):
+    """Home page."""
+
     URL = BASE_URL
 
     HEADER = (By.TAG_NAME, "h1")
@@ -16,4 +18,5 @@ class HomePage(BasePage):
     AUTHORIZATION_LINK_TEXT = "Form Authentication"
 
     def click_authorization_form(self):
+        """Click on authorization form."""
         self.click(self.AUTHORIZATION_LINK)

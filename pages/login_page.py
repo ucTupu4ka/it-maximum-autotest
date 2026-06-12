@@ -1,15 +1,17 @@
+import logging
 import allure
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
 from data.constants import BASE_URL
 from data.users import User
-from utils.logger import get_logger
 
-logger = get_logger(__name__)
+logger = logging.getLogger(__name__)
 
 
 class LoginPage(BasePage):
+    """Login page."""
+
     URL = BASE_URL + "login"
 
     HEADER = (By.TAG_NAME, "h2")
@@ -32,19 +34,23 @@ class LoginPage(BasePage):
     LOGOUT_MESSAGE_TEXT = "You logged out of the secure area!"
 
     def enter_username(self, user: str):
+        """Enter username in username field."""
         field = self.find(self.USERNAME_FIELD)
         field.clear()
         field.send_keys(user)
 
     def enter_password(self, password: str):
+        """Enter password in password field."""
         field = self.find(self.PASSWORD_FIELD)
         field.clear()
         field.send_keys(password)
 
     def click_login_button(self):
+        """Click login button."""
         self.click(self.LOGIN_BUTTON)
 
     def login(self, user: User):
+        """Login with user credentials."""
         with allure.step(f"Login as {user.username}"):
             logger.info("Login as %s", user.username)
             self.enter_username(user.username)

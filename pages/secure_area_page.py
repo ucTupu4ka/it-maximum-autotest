@@ -5,6 +5,7 @@ from data.constants import BASE_URL
 
 
 class SecureAreaPage(BasePage):
+    """Secure area page."""
 
     URL = BASE_URL + "secure"
 
@@ -22,4 +23,5 @@ class SecureAreaPage(BasePage):
     SUCCESS_MESSAGE_TEXT = "You logged into a secure area!"
 
     def click_logout_button(self):
+        """Click logout button."""
         self.click(self.LOGOUT_BUTTON)
