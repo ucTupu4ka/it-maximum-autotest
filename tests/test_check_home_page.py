@@ -1,8 +1,12 @@
+import allure
 from pytest_check import check
 
 from pages.home_page import HomePage
 
 
+@allure.feature("Главная страница")
+@allure.story("Отображение элементов")
+@allure.title("Главная страница отображается корректно")
 def test_home_page_is_displayed(driver):
     home_page = HomePage(driver)
 

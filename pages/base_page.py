@@ -1,5 +1,11 @@
+import allure
+from selenium.common import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+from utils.logger import get_logger
+
+logger = get_logger(__name__)
 
 
 class BasePage:
@@ -10,7 +16,9 @@ class BasePage:
         self.wait = WebDriverWait(driver, 10)
 
     def open(self):
-        self.driver.get(self.URL)
+        with allure.step(f"Open page {self.URL}"):
+            logger.info("Open %s", self.URL)
+            self.driver.get(self.URL)
 
     def is_opened(self) -> bool:
         return self.driver.current_url == self.URL
@@ -30,5 +38,6 @@ class BasePage:
         try:
             self.find(locator)
             return True
-        except Exception:
+        except TimeoutException:
+            logger.warning("Element not found: %s", locator)
             return False

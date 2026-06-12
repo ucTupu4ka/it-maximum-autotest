@@ -6,8 +6,8 @@ from selenium.webdriver.firefox.options import Options as FirefoxOptions
 class DriverFactory:
     @staticmethod
     def create_driver(
-        browser: str = "chrome",
-        headless: bool = False,
+        browser: str,
+        headless: bool,
     ):
         browser = browser.lower()
 
@@ -39,7 +39,5 @@ class DriverFactory:
                 f"Unsupported browser: {browser}. "
                 f"Supported browsers: chrome, firefox"
             )
-
-        driver.implicitly_wait(3)
 
         return driver

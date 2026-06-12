@@ -1,3 +1,4 @@
+import allure
 from pytest_check import check
 
 from pages.home_page import HomePage
@@ -7,6 +8,9 @@ from data.users import INVALID_USER
 from data.users import VALID_USER
 
 
+@allure.feature("Авторизация")
+@allure.story("Отображение страницы логина")
+@allure.title("Страница логина отображается корректно")
 def test_login_page_is_displayed(driver):
     home_page = HomePage(driver)
 
@@ -26,6 +30,9 @@ def test_login_page_is_displayed(driver):
                 )
 
 
+@allure.feature("Авторизация")
+@allure.story("Невалидные данные")
+@allure.title("Сообщение об ошибке при неверном логине")
 def test_invalid_authorization_data(driver):
     login_page = LoginPage(driver)
 
@@ -38,6 +45,10 @@ def test_invalid_authorization_data(driver):
                 'Error message is not correct'
                 )
 
+
+@allure.feature("Авторизация")
+@allure.story("Валидные данные")
+@allure.title("Успешный вход в secure area")
 def test_valid_authorization_data(driver):
     login_page = LoginPage(driver)
 
