@@ -86,7 +86,7 @@ cd it-maximum-autotest
 **Windows** (PowerShell или cmd):
 
 ```powershell
-git clone <URL-репозитория>
+git clone https://github.com/ucTupu4ka/it-maximum-autotest.git
 cd it-maximum-autotest
 ```
 
