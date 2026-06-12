@@ -32,10 +32,14 @@ class LoginPage(BasePage):
     LOGOUT_MESSAGE_TEXT = "You logged out of the secure area!"
 
     def enter_username(self, user: str):
-        self.find(self.USERNAME_FIELD).send_keys(user)
+        field = self.find(self.USERNAME_FIELD)
+        field.clear()
+        field.send_keys(user)
 
     def enter_password(self, password: str):
-        self.find(self.PASSWORD_FIELD).send_keys(password)
+        field = self.find(self.PASSWORD_FIELD)
+        field.clear()
+        field.send_keys(password)
 
     def click_login_button(self):
         self.click(self.LOGIN_BUTTON)

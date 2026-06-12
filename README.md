@@ -22,11 +22,21 @@
 it-maximum-autotest/
 ├── conftest.py          # фикстуры pytest, Allure, логирование
 ├── pytest.ini           # настройки pytest и Allure
+├── docs/                # документация и отчёт о тестировании
 ├── pages/               # Page Object классы
 ├── tests/               # тестовые сценарии
 ├── data/                # тестовые данные и константы
 └── utils/               # фабрика WebDriver, логгер
 ```
+
+## Документация
+
+| Документ | Описание |
+|----------|----------|
+| [docs/TEST_DOCUMENTATION.md](docs/TEST_DOCUMENTATION.md) | Документация тестов: предположения, ограничения, матрица ТЗ → тесты |
+| [docs/TEST_REPORT.md](docs/TEST_REPORT.md) | Отчёт о результатах последнего прогона |
+
+---
 
 ## Предварительные требования
 
@@ -150,9 +160,10 @@ poetry run pytest tests/test_login_page.py::test_valid_authorization_data
 | Тест | Сценарий |
 |------|----------|
 | `test_home_page_is_displayed` | Отображение главной страницы |
-| `test_login_page_is_displayed` | Переход и отображение формы логина |
+| `test_login_page_is_displayed` | Переход по ссылке и отображение формы логина |
 | `test_invalid_authorization_data` | Ошибка при неверных учётных данных |
 | `test_valid_authorization_data` | Успешный вход в secure area |
 | `test_logout` | Выход из системы |
+| `test_full_authorization_flow` | Полный E2E-сценарий по ТЗ |
 
 При падении теста в Allure автоматически прикрепляется скриншот страницы.

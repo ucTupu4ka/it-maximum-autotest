@@ -20,9 +20,7 @@ def test_login_page_is_displayed(driver):
 
     login_page = LoginPage(driver)
 
-    login_page.open()
-
-    check.is_true(login_page.is_opened(), 'Login page is not opened')
+    check.is_true(login_page.is_opened(), 'Login page is not opened after clicking the link')
     check.equal(login_page.get_text(login_page.HEADER), login_page.HEADER_TEXT, 'Header text is not correct')
     check.equal(login_page.get_text(login_page.SUBHEADER), login_page.SUBHEADER_TEXT, 'Subheader text is not correct')
     check.equal(login_page.get_text(login_page.LOGIN_BUTTON), login_page.LOGIN_BUTTON_TEXT,
@@ -41,7 +39,7 @@ def test_invalid_authorization_data(driver):
     login_page.login(INVALID_USER)
 
     check.is_true(login_page.is_element_visible(login_page.MESSAGE), 'Error message is not displayed')
-    check.equal(login_page.get_text(login_page.MESSAGE)[:-2], login_page.ERROR_MESSAGE_TEXT,
+    check.equal(login_page.get_message_text(login_page.MESSAGE), login_page.ERROR_MESSAGE_TEXT,
                 'Error message is not correct'
                 )
 
@@ -59,8 +57,8 @@ def test_valid_authorization_data(driver):
     secure_page = SecureAreaPage(driver)
 
     check.is_true(secure_page.is_element_visible(secure_page.MESSAGE), 'Success message is not displayed')
-    check.equal(secure_page.get_text(secure_page.MESSAGE)[:-2], secure_page.SUCCESS_MESSAGE_TEXT,
-                'Error message is not correct'
+    check.equal(secure_page.get_message_text(secure_page.MESSAGE), secure_page.SUCCESS_MESSAGE_TEXT,
+                'Success message is not correct'
                 )
 
     check.is_true(secure_page.is_opened(), 'Secure page is not opened')

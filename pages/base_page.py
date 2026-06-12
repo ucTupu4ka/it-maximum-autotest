@@ -34,6 +34,10 @@ class BasePage:
     def get_text(self, locator) -> str:
         return self.find(locator).text
 
+    def get_message_text(self, locator) -> str:
+        """Return flash message text without the trailing icon character."""
+        return self.get_text(locator).replace("×", "").strip()
+
     def is_element_visible(self, locator) -> bool:
         try:
             self.find(locator)

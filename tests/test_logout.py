@@ -22,4 +22,4 @@ def test_logout(driver):
 
     check.is_true(login_page.is_opened(), 'Login page is not opened')
 
-    check.equal(login_page.get_text(login_page.MESSAGE)[:-2], login_page.LOGOUT_MESSAGE_TEXT, 'Logout message is not correct')
+    check.equal(login_page.get_message_text(login_page.MESSAGE), login_page.LOGOUT_MESSAGE_TEXT, 'Logout message is not correct')
